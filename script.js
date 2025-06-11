@@ -179,7 +179,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
 
   const max_rebate = Math.min(max_allowable_dps * 0.15, allowable_rebate);
 
-  const remaining_tax = Math.min(0.0, total_tax - max_rebate);
+  const remaining_tax = Math.max(0.0, total_tax - max_rebate);
 
 
 
