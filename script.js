@@ -86,37 +86,37 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
   const taxSlabs = [
     {
       slab: "1st slab",
-      description: "first 350000",
+      description: "350000",
       amount: 350000,
       rate: 0
     },
     {
       slab: "2nd slab",
-      description: "next 100000",
+      description: "100000",
       amount: 100000,
       rate: 0.05
     },
     {
       slab: "3rd slab",
-      description: "next 300000",
+      description: "300000",
       amount: 300000,
       rate: 0.10
     },
     {
       slab: "4th slab",
-      description: "next 400000",
+      description: "400000",
       amount: 400000,
       rate: 0.15
     },
     {
       slab: "5th slab",
-      description: "next 500000",
+      description: "500000",
       amount: 500000,
       rate: 0.20
     },
     {
       slab: "6th slab",
-      description: "next 600000",
+      description: ">500000",
       amount: 6000000000,
       rate: 0.25
     }
@@ -147,9 +147,9 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
     const row = `
         <tr>
           <td>${slab.slab}</td>
-          <td>${slab.amount}</td>
+          <td>${slab.description}</td>
           <td>${(slab.rate * 100).toFixed(0)}%</td>
-           <td>${taxableAmount}</td>
+          <td>${taxableAmount}</td>
           <td>${tax.toFixed(0)}</td>
         </tr>
       `;
