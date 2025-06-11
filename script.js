@@ -220,7 +220,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
   console.log("tax-year", taxyear);
 
   doc.setFontSize(12); 
-  doc.text(tax-year.toString(), 14, horizontalY+=10);
+  doc.text(taxyear.toString(), 14, horizontalY+=10);
   doc.text(name.toString(), 14, horizontalY+=6);
 
   doc.text(`Total Income: ${total_income}`, 14, horizontalY+=10);
