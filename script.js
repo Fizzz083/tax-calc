@@ -280,7 +280,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
  // let st = "Hello";
  // doc.text(st.toString(), 14, summaryY);
   horizontalY = summaryY;
-  doc.text(`Payable Tax: ${total_income}`, 14, horizontalY+=6);
+  doc.text(`Payable Tax: ${total_tax}`, 14, horizontalY+=6);
   doc.text(`Total Investment: ${dps_amount}`, 14, horizontalY+=6);
   doc.text(`Rebate: ${max_rebate}`, 14, horizontalY+=6);
   doc.text(`Remaining Tax: ${remaining_tax}`, 14, horizontalY+=6);
