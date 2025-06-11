@@ -3,7 +3,7 @@ document.getElementById('income_1').value = localStorage.getItem('income1');
 document.getElementById('income_2').value = localStorage.getItem('income2');
 
 document.getElementById('name').value = localStorage.getItem('name');
-document.getElementById('session').value = localStorage.getItem('session');
+document.getElementById('tax-year').value = localStorage.getItem('session');
 
 
 document.getElementById('income_month_1').value = localStorage.getItem('income_month_1');
@@ -117,7 +117,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
     {
       slab: "6th slab",
       description: "next 600000",
-      amount: 600000,
+      amount: 6000000000,
       rate: 0.25
     }
   ];
@@ -139,25 +139,32 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
 
     data.push([
       slab.slab,
-      slab.description,
       slab.amount.toString(),
       `${slab.rate * 100}%`,
-      remainingIncome.toString(),
-      taxableAmount.toString(),
       tax.toFixed(0)  // rounded to integer
     ]);
 
     const row = `
         <tr>
           <td>${slab.slab}</td>
-          <td>${slab.description}</td>
           <td>${slab.amount}</td>
           <td>${(slab.rate * 100).toFixed(0)}%</td>
-          <td>${Math.max(0, remainingIncome)}</td>
-          <td>${taxableAmount}</td>
+           <td>${taxableAmount}</td>
           <td>${tax.toFixed(0)}</td>
         </tr>
       `;
+
+      // const row = `
+      //   <tr>
+      //     <td>${slab.slab}</td>
+      //     <td>${slab.description}</td>
+      //     <td>${slab.amount}</td>
+      //     <td>${(slab.rate * 100).toFixed(0)}%</td>
+      //     <td>${Math.max(0, remainingIncome)}</td>
+      //     <td>${taxableAmount}</td>
+      //     <td>${tax.toFixed(0)}</td>
+      //   </tr>
+      // `;
 
     total_tax += tax;
 
@@ -204,10 +211,10 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
   doc.text(text.toString(), textX, horizontalY);
 
   const name = "Name: "+document.getElementById('name').value;
-  const session = "Tax Year: "+ document.getElementById('session').value;
+  const session = "Tax Year: "+ document.getElementById('tax-year').value;
 
   localStorage.setItem('name', document.getElementById('name').value);
-  localStorage.setItem('session', document.getElementById('session').value); 
+  localStorage.setItem('session', document.getElementById('tax-year').value); 
 
   console.log("Name", name);
   console.log("session", session);
@@ -223,7 +230,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
   
   doc.text(`Taxable Income: ${taxable_income}`, 14, horizontalY+=6);
 
-  const headers = ["Slab", "Description", "Slab Amt", "Rate", "Remaining", "Taxable", "Tax"];
+  const headers = ["Slab", "Amount", "Rate", "Tax"];
   // const data = [
   //   ["1st Slab", "first 350000", "350000", "0%", "415000", "350000", "0"],
   //   ["2nd Slab", "next 100000", "100000", "5%", "315000", "100000", "5000"],
