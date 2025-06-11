@@ -15,7 +15,7 @@ body {
   left: 0;
   width: 100%;
   height: 280%;
-  background-image: url('https://github.com/Fizzz083/tax-calc/blob/main/income_tax.jpg');
+  background-image: url('./income_tax.jpg');
   background-size: cover;
   filter: blur(8px);
   z-index: 0;
