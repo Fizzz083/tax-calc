@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <div class="container">
+            <div id="pageContent">
+                <h1>Tax Calculator</h1>
+                <form id="taxForm">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" value="" />
+                        </div>
+                        <div class="input-group">
+                            <label for="income_month_1">Tax Year:</label>
+                            <input type="text" id="session" value="" />
+                        </div>
+                    </div><br><br>
+                    <h3>Salary</h3>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="income_1">Enter Salary 1:</label>
+                            <input type="number" id="income_1" value="0" />
+                        </div>
+                        <div class="input-group">
+                            <label for="income_month_1">Month(s) :</label>
+                            <input type="number" id="income_month_1" value="0" />
+                        </div>
+                    </div><br>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="income_2">Enter Salary 2:</label>
+                            <input type="number" id="income_2" value="0" />
+                        </div>
+                        <div class="input-group">
+                            <label for="income_month_2">Month(s) :</label>
+                            <input type="number" id="income_month_2" value="0" />
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <div style="width: 100%;">
+                        <hr style="border: none; height: 4px; background-color: black;" />
+                    </div>
+
+                    <br>
+
+
+
+                    <h3>Bonus</h3>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="bonus_1">Enter Bonus 1:</label>
+                            <input type="number" id="bonus_1" value="0" />
+                        </div>
+                        <div class="input-group">
+                            <label for="bonus_1">Month(s) :</label>
+                            <input type="number" id="bonus_month_1" value="0" />
+                        </div>
+                    </div><br>
+
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="bonus_2">Enter Bonus 2:</label>
+                            <input type="number" id="bonus_2" value="0" />
+                        </div>
+                        <div class="input-group">
+                            <label for="bonus_1">Month(s) :</label>
+                            <input type="number" id="bonus_month_2" value="0" />
+                        </div>
+                    </div>
+                    <br>
+
+
+
+                    <div style="width: 100%;">
+                        <hr style="border: none; height: 4px; background-color: black;" />
+                    </div>
+
+
+
+                    <h3>Rebate Investment</h3>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <label for="bonus_2" style="width: 50%;">Enter DPS amount:</label>
+                            <input type="number" id="dps_amount" value="0" />
+                        </div>
+                        <!-- <div style="display: flex; align-items: center; gap: 10px;">
+                    <label for="bonus_2" style="width: 50%;">Enter investment amount:</label>
+                    <input type="number" id="investment_amount" value="0" required />
+                </div> -->
+                        <!-- <div style="display: flex; align-items: center; gap: 30px;">
+                    <label for="bonus_2">Enter DPS amount:</label>
+                    <input type="number" id="bonus_2" value="0" required />
+                </div> -->
+                    </div>
+
+                    <button type="submit">Calculate Tax</button>
+                </form>
+
+
+
+
+
+
+                <br>
+                <br>
+                <!-- <div class="input-row">
+            <div class="input-group">
+                <label for="total_salary">Total Salary:</label>
+                <p id="total_salary">0</p>
+            </div>
+        </div> -->
+                <div id="slab_div" style="display:none">
+                    <div id="total_salary"></div>
+                    <div id="total_investment"></div>
+                    <!-- <div id="taxable_income"></div> -->
+
+                    <div style="width: 100%;">
+                        <hr style="border: none; height: 4px; background-color: black;" />
+                    </div>
+
+                    <div>
+                        <h1>Tax Breakdown for Taxable Income: <div id="taxable_income"></div>
+                        </h1>
+
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Slab</th>
+                                    <th>Description</th>
+                                    <th>Slab Amount</th>
+                                    <th>Rate</th>
+                                    <th>Remaining Income</th>
+                                    <th>Taxable Amount</th>
+                                    <th>Tax</th>
+                                </tr>
+                            </thead>
+                            <tbody id="taxTableBody"></tbody>
+                        </table>
+                    </div>
+                    <div style="width: 100%;">
+                        <hr style="border: none; height: 4px; background-color: black;" />
+                    </div>
+
+                    <br>
+                    <div id="total_tax"></div>
+                    <div id="total_rebate"></div>
+                    <div id="remaining_tax"></div>
+
+                    <button id="downloadBtn">Download PDF</button>
+                </div>
+            </div>
+            
+            <!-- display: none;  -->
+        </div>
+
+        
+
+    </div>
+</body>
+
+<script src="script.js"></script>
+
+</html>
