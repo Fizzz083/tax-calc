@@ -3,7 +3,7 @@ document.getElementById('income_1').value = localStorage.getItem('income1');
 document.getElementById('income_2').value = localStorage.getItem('income2');
 
 document.getElementById('name').value = localStorage.getItem('name');
-document.getElementById('tax-year').value = localStorage.getItem('session');
+document.getElementById('tax-year').value = localStorage.getItem('tax-year');
 
 
 document.getElementById('income_month_1').value = localStorage.getItem('income_month_1');
@@ -211,16 +211,16 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
   doc.text(text.toString(), textX, horizontalY);
 
   const name = "Name: "+document.getElementById('name').value;
-  const session = "Tax Year: "+ document.getElementById('tax-year').value;
+  const taxyear = "Tax Year: "+ document.getElementById('tax-year').value;
 
   localStorage.setItem('name', document.getElementById('name').value);
-  localStorage.setItem('session', document.getElementById('tax-year').value); 
+  localStorage.setItem('tax-year', document.getElementById('tax-year').value); 
 
   console.log("Name", name);
-  console.log("session", session);
+  console.log("tax-year", taxyear);
 
   doc.setFontSize(12); 
-  doc.text(session.toString(), 14, horizontalY+=10);
+  doc.text(tax-year.toString(), 14, horizontalY+=10);
   doc.text(name.toString(), 14, horizontalY+=6);
 
   doc.text(`Total Income: ${total_income}`, 14, horizontalY+=10);
