@@ -18,12 +18,12 @@ body {
 
 
 .header-header {
-  background: linear-gradient(to right, #127892, #4ec3dd); /* Bluish gradient */
+  background: linear-gradient(to right, #127892, #1d92af); /* Bluish gradient */
   color: white;
   padding: 30px 20px;
   text-align: center;
   justify-content: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
   border-radius: 15px 15px 15px 15px;
   width: fit-content;
   margin: 0 auto;
