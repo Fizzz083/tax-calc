@@ -1,37 +1,58 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f0f2f5;
+  background: #fafafa;
   padding: 20;
-  width: 100%;
-  height: 200%;
+  /* width: 100%;
+  height: 100%; */
   font-weight: bold;
 
   line-height: 1.6;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   overflow-x: hidden;
   box-sizing: border-box;
 
 }
 
 
+.header-header {
+  background: linear-gradient(to right, #127892, #4ec3dd); /* Bluish gradient */
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px 15px 15px 15px;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.header-content h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #00000050;
+}
+
+
 
 .background {
-  position: absolute;
+  position:relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: 280%;
-  background-image: url('./income_tax.jpg');
-  background-size: cover;
+  height: 100%;  
+  /* background-image: url('./income_tax.jpg'); */
+  background-color: #65e276d7;
+  background-size:contain;
   filter: blur(8px);
   z-index: 0;
 }
 
 .page-wrapper {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,10 +62,10 @@ body {
   padding: 40px 20px;
 
 
-  width: 100%;
-  max-width: 600px;
-  background-color: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  /* width: 100%; */
+  /* max-width: 600px; */
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.767);
   border-radius: 8px;
   margin: 20px;
   box-sizing: border-box;
@@ -59,7 +80,6 @@ body {
     /* text-align: center; */
     /* centers inline and text elements */
     display: flex;
-    flex-direction: column;
     align-items: center;
   }
 
@@ -70,12 +90,16 @@ body {
   }
 
   .page-wrapper .container {
-    width: 100%;
+    width: 90%;
     margin: 0px;
-    padding: 10px;
-    justify-content: center;
+    padding: 0.1%;
+    justify-content: flex-start;
     margin-left: 0px;
     padding: 40px 20px;
+    width: fit-content;
+  }
+  .container{
+  padding: 0.1%;
   }
 
   .table-wrapper {
@@ -84,7 +108,7 @@ body {
     margin-left: 0px;
     margin: 0 auto;
     min-width: 90%;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   th,
@@ -190,12 +214,12 @@ table {
   border-collapse: collapse;
   border-radius: 12px;
   overflow: hidden;
-  background-color: #816bcf;
+  background-color: #68abd8;
   table-layout: auto; 
 }
 
 thead {
-  background-color: #2d205c;
+  background-color: #127892;
   color: rgb(249, 251, 255);
 }
 
@@ -270,7 +294,7 @@ th {
 
 
 .custom-button {
-  background: #2d205c;
+  background: #0c5568;
   border-radius: 999px;
   box-shadow: #5E5DF0 0 20px 20px -5px;
   box-sizing: border-box;
