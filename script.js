@@ -123,7 +123,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
       slab.slab,
       slab.printDescription,
       `${slab.rate * 100}%`,
-      tax.toFixed(0)
+      tax.toFixed(2)
     ]);
 
     const row = `
@@ -131,7 +131,7 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
           <td>${slab.slab}</td>
           <td>${slab.printDescription}</td>
           <td>${(slab.rate * 100).toFixed(0)}%</td>
-          <td>${taxableAmount}</td>
+          <td>${taxableAmount.toFixed(2)}</td>
           <td>${tax.toFixed(0)}</td>
         </tr>
       `;
@@ -208,11 +208,11 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
 
   doc.setFont("helvetica", "bold");
   doc.text(`Total Income:`, textX, horizontalY+=10); doc.setFont("helvetica", "normal");
-  doc.text(`${total_income} Taka`, textX+40, horizontalY); 
+  doc.text(`${total_income.toFixed(2)} Taka`, textX+40, horizontalY); 
   
   doc.setFont("helvetica", "bold");
   doc.text(`Taxable Income:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${taxable_income} Taka`, textX+40, horizontalY);
+  doc.text(`${taxable_income.toFixed(2)} Taka`, textX+40, horizontalY);
 
 
 
@@ -272,19 +272,19 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
 
   doc.setFont("helvetica", "bold");
   doc.text(`Payable Tax:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${total_tax} Taka`, textX+40, horizontalY);
+  doc.text(`${total_tax.toFixed(2)} Taka`, textX+40, horizontalY);
 
   doc.setFont("helvetica", "bold");
   doc.text(`Total Investment:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${dps_amount} Taka`, textX+40, horizontalY);
+  doc.text(`${dps_amount.toFixed(2)} Taka`, textX+40, horizontalY);
 
   doc.setFont("helvetica", "bold");
   doc.text(`Max Rebate:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${max_rebate} Taka`, textX+40, horizontalY);
+  doc.text(`${max_rebate.toFixed(2)} Taka`, textX+40, horizontalY);
 
   doc.setFont("helvetica", "bold");
   doc.text(`Remaining Tax:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${remaining_tax} Taka`, textX+40, horizontalY);
+  doc.text(`${remaining_tax.toFixed(2)} Taka`, textX+40, horizontalY);
 
   setTimeout(() => {
     document.getElementById('slab_div').style.display = 'inline-block';
