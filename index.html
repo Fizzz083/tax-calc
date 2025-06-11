@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="styles.css" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
 
 </head>
 
@@ -18,15 +20,14 @@
             <div id="pageContent">
                 <h1 class="header-header">Tax Calculator</h1><br>
                 <form id="taxForm">
-                    <div >
+                    <div>
                         <div class="input-group">
                             <label for="name">Name:</label>
                             <input type="text" id="name" value="" />
                         </div> <br>
-                        <div >
+                        <div>
                             <label for="income_month_1">Tax Year:</label>
                             <select id="tax-year" class="dropdown">
-                                <!-- <option value="2025-2026">2025-2026</option> -->
                                 <option value="2024-2025" selected>2024-2025</option>
                                 <option value="2023-2024">2023-2024</option>
                                 <option value="2022-2023">2022-2023</option>
@@ -55,17 +56,12 @@
                             <label for="income_month_2">Month(s) :</label>
                             <input type="number" id="income_month_2" value="0" />
                         </div>
-                    </div>
-                    <br>
+                    </div><br>
 
 
                     <div style="width: 100%;">
                         <hr style="border: none; height: 4px; background-color: black;" />
-                    </div>
-
-                    <br>
-
-
+                    </div><br>
 
                     <h2>Bonus</h2>
                     <div class="input-row">
@@ -88,54 +84,28 @@
                             <label for="bonus_1">Month(s) :</label>
                             <input type="number" id="bonus_month_2" value="0" />
                         </div>
-                    </div>
-                    <br>
-
-
+                    </div><br>
 
                     <div style="width: 100%;">
                         <hr style="border: none; height: 4px; background-color: black;" />
                     </div>
 
 
-
                     <h3>Rebate Investment</h3>
                     <div>
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <label for="bonus_2" style="width: 50%;">Enter DPS amount:</label>
-                            <input type="number" id="dps_amount" value="0" />
+                            <label for="bonus_2" style="width: 50%;">Enter DPS amount:
+                                <p style="font-size: 10px;">(Max 120000)</p>
+                            </label>
+                            <input type="number" id="dps_amount" value="0" max="120000" />
                         </div><br>
-                        <!-- <div style="display: flex; align-items: center; gap: 10px;">
-                    <label for="bonus_2" style="width: 50%;">Enter investment amount:</label>
-                    <input type="number" id="investment_amount" value="0" required />
-                </div> -->
-                        <!-- <div style="display: flex; align-items: center; gap: 30px;">
-                    <label for="bonus_2">Enter DPS amount:</label>
-                    <input type="number" id="bonus_2" value="0" required />
-                </div> -->
-                </div >
-
+                    </div>
                     <button type="submit" class="custom-button">Calculate Tax</button>
-                </form>
+                </form><br><br>
 
-
-
-
-
-
-                <br>
-                <br>
-                <!-- <div class="input-row">
-            <div class="input-group">
-                <label for="total_salary">Total Salary:</label>
-                <p id="total_salary">0</p>
-            </div>
-        </div> -->
                 <div id="slab_div" style="display:none">
                     <div id="total_salary"></div>
                     <div id="total_investment"></div>
-                    <!-- <div id="taxable_income"></div> -->
-
                     <div class="table-wrapper">
                         <div>
                             <div style="width: 100%;">
@@ -151,10 +121,8 @@
                                 <thead>
                                     <tr>
                                         <th>Slab</th>
-                                        <!-- <th>Description</th> -->
                                         <th>Slab Amount</th>
                                         <th>Rate</th>
-                                        <!-- <th>Remaining Income</th> -->
                                         <th>Taxable Amount</th>
                                         <th>Tax</th>
                                     </tr>
@@ -176,8 +144,6 @@
                     <button class="custom-button" id="downloadBtn">Download PDF</button>
                 </div>
             </div>
-
-            <!-- display: none;  -->
         </div>
     </div>
 </body>
