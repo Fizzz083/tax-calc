@@ -1,3 +1,5 @@
+**Web: https://fizzz083.github.io/tax-calc/**
+
 # 🧾 Tax Calculator Web App for Bangladesh
 
 A user-friendly tax calculation web application tailored for individuals in **Bangladesh**, helping you easily estimate your annual income tax based on the **latest National Board of Revenue (NBR)** slab system.
