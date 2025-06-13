@@ -165,127 +165,289 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
 
 
 
-
-  doc = new jsPDF();
-  const pageWidth = doc.internal.pageSize.getWidth();
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(20);
-
-  const text = "Income Tax Summary";
-  const textWidth = doc.getTextWidth(text);
-  let textX = (pageWidth - textWidth) / 2 ;
-  
-  let horizontalY = 30;
-  doc.text(text.toString(), textX, horizontalY);
-
-
-  textX = 30;
-  const name = document.getElementById('name').value;
-  const taxyear = document.getElementById('tax-year').value;
-
-  localStorage.setItem('name', document.getElementById('name').value);
-  localStorage.setItem('tax-year', document.getElementById('tax-year').value); 
-
-  console.log("Name", name);
-  console.log("tax-year", taxyear);
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(12); 
-  // horizontalY+=10;
-  // doc.text(taxyear.toString(), textX, horizontalY+=10);
-  // doc.text(name.toString(), textX, horizontalY+=6);
-
-  doc.setFont("helvetica", "bold");
-  doc.text(`Tax-Year:`, textX, horizontalY+=15); doc.setFont("helvetica", "normal");
-  doc.text(`${taxyear}`, textX+40, horizontalY);
-  
-  doc.setFont("helvetica", "bold");
-  doc.text(`Name:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${name}`, textX+40, horizontalY);
-
-  // doc.text(`Total Income: ${total_income}`, textX, horizontalY+=10);  
-  // doc.text(`Taxable Income: ${taxable_income}`, textX, horizontalY+=6);
-
-  doc.setFont("helvetica", "bold");
-  doc.text(`Total Income:`, textX, horizontalY+=10); doc.setFont("helvetica", "normal");
-  doc.text(`${total_income.toFixed(2)} Taka`, textX+40, horizontalY); 
-  
-  doc.setFont("helvetica", "bold");
-  doc.text(`Taxable Income:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${taxable_income.toFixed(2)} Taka`, textX+40, horizontalY);
-
-
-
-  const headers = ["Slab", "Amount", "Rate", "Tax"];
- 
-  let startY = horizontalY;
-  doc.setFontSize(12);
-  doc.setTextColor(0);
-  const cellPadding = 3;
-  const colWidths = [25, 35, 25, 20];
-
-  // Headers
-
-  doc.setFont("helvetica", "bold");
-  doc.setFontSize(14);
-  doc.text(`Tax BreakDown:`, textX, startY+=10);
-  startY+=6;
-
-
-  doc.setFont("helvetica", "bold");
-  const columns = [
-    { header: 'Slab', dataKey: 'slab' },
-    { header: 'Amount', dataKey: 'printDescription' },
-    { header: 'Rate', dataKey: 'rate' },
-    { header: 'Tax', dataKey: 'tax' },
-  ];
-
-  doc.autoTable({
-    columns: columns,
-    body: data,
-    startY: startY,
-    styles: {
-      fontSize: 10,
-      textColor: [40, 40, 40],
-      fillColor: [240, 240, 240],
-      halign: 'center',
-      valign: 'middle',
-    },
-    headStyles: {
-      fillColor: [51, 69, 83],
-      textColor: 255,
-      fontStyle: 'bold',
-    },
-    alternateRowStyles: {
-      fillColor: [255, 255, 255],
-    },
-    margin: { top: 10, left: textX+10, right: 24},
-  });
-
-  doc.setFont("helvetica", "normal");
-  doc.setFontSize(10);
-
-  // Summary
-  const summaryY = startY + 7 + data.length * 7 + 10;
-  doc.setFontSize(12);
-  horizontalY = summaryY;
-
-  doc.setFont("helvetica", "bold");
-  doc.text(`Payable Tax:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${total_tax.toFixed(2)} Taka`, textX+40, horizontalY);
-
-  doc.setFont("helvetica", "bold");
-  doc.text(`Total Investment:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${dps_amount.toFixed(2)} Taka`, textX+40, horizontalY);
-
-  doc.setFont("helvetica", "bold");
-  doc.text(`Max Rebate:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${max_rebate.toFixed(2)} Taka`, textX+40, horizontalY);
-
-  doc.setFont("helvetica", "bold");
-  doc.text(`Remaining Tax:`, textX, horizontalY+=6); doc.setFont("helvetica", "normal");
-  doc.text(`${remaining_tax.toFixed(2)} Taka`, textX+40, horizontalY);
-
+  // Create new PDF document
+     doc = new jsPDF();
+ const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    
+    // Color scheme
+    const primaryColor = [98, 55, 173]; //rgb(98, 55, 173)
+    const secondaryColor = [98, 55, 173]; // #764ba2
+    const darkGray = [45, 55, 72];
+    const lightGray = [247, 250, 252];
+    const white = [255, 255, 255];
+    
+    // Get form data
+    const name = document.getElementById('name').value || 'N/A';
+    const taxYear = document.getElementById('tax-year').value;
+    
+    // ===== PAGE 1 LAYOUT =====
+    
+    // Compact header background
+    doc.setFillColor(...primaryColor);
+    doc.rect(0, 0, pageWidth, 35, 'F');
+    
+    // Add gradient effect simulation
+    doc.setFillColor(98, 55, 173);
+    doc.rect(0, 0, pageWidth, 15, 'F');
+    doc.setFillColor(98, 55, 173);  
+    doc.rect(0, 15, pageWidth, 20, 'F');
+    
+    // Header title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.setTextColor(255, 255, 255);
+    const headerText = "INCOME TAX SUMMARY";
+    const headerTextWidth = doc.getTextWidth(headerText);
+    doc.text(headerText, (pageWidth - headerTextWidth) / 2, 23);
+    
+    // Reset text color for body
+    doc.setTextColor(...darkGray);
+    
+    // Personal Information Section - Compact
+    let currentY = 50;
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(...primaryColor);
+    doc.text("Personal Information", 20, currentY);
+    
+    // Add section underline
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.8);
+    doc.line(20, currentY + 2, 110, currentY + 2);
+    
+    currentY += 8;
+    
+    // Compact info layout - side by side
+    doc.setFillColor(...lightGray);
+    doc.roundedRect(15, currentY, pageWidth - 30, 18, 2, 2, 'F');
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(...darkGray);
+    
+    doc.text("Tax Year:", 20, currentY + 7);
+    doc.setFont("helvetica", "normal");
+    doc.text(taxYear, 50, currentY + 7);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Name:", 20, currentY + 14);
+    doc.setFont("helvetica", "normal");
+    doc.text(name, 50, currentY + 14);
+    
+    currentY += 25;
+    
+    // Financial Summary Section - Compact
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(...primaryColor);
+    doc.text("Financial Summary", 20, currentY);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.8);
+    doc.line(20, currentY + 2, 105, currentY + 2);
+    
+    currentY += 8;
+    
+    // Format currency function
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(amount) + ' Taka';
+    };
+    
+    // Compact financial summary
+    doc.setFillColor(...lightGray);
+    doc.roundedRect(15, currentY, pageWidth - 30, 24, 2, 2, 'F');
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(10);
+    doc.setTextColor(...darkGray);
+    
+    const leftCol = 20;
+    const rightCol = 110;
+    
+    doc.text("Total Salary:", leftCol, currentY + 7);
+    doc.setFont("helvetica", "normal");
+    doc.text(formatCurrency(total_income), rightCol, currentY + 7);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Total Investment:", leftCol, currentY + 14);
+    doc.setFont("helvetica", "normal");
+    doc.text(formatCurrency(dps_amount), rightCol, currentY + 14);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Taxable Income:", leftCol, currentY + 21);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(...primaryColor);
+    doc.text(formatCurrency(taxable_income), rightCol, currentY + 21);
+    
+    currentY += 35;
+    
+    // Tax Breakdown Section
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(...primaryColor);
+    doc.text("Tax Breakdown", 20, currentY);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.8);
+    doc.line(20, currentY + 2, 95, currentY + 2);
+    
+    currentY += 8;
+    
+    // Compact table configuration
+    const columns = [
+        { header: 'Slab', dataKey: 'slab' },
+        { header: 'Amount', dataKey: 'printDescription' },
+        { header: 'Rate', dataKey: 'rate' },
+        { header: 'Tax', dataKey: 'tax' }
+    ];
+    
+    // Format table data for better display
+    const formattedData = data.map(row => ({
+        ...row,
+        printDescription: formatCurrency(parseFloat(row[1].replace(/[৳,]/g, ''))),
+        tax: formatCurrency(parseFloat(row[3].replace(/[৳,]/g, '')))
+    }));
+    
+    doc.autoTable({
+        columns: columns,
+        body: data,
+        startY: currentY,
+        theme: 'striped',
+        styles: {
+            fontSize: 9,
+            textColor: darkGray,
+            cellPadding: 3,
+            valign: 'middle'
+        },
+        headStyles: {
+            fillColor: primaryColor,
+            textColor: white,
+            fontStyle: 'bold',
+            fontSize: 10
+        },
+        alternateRowStyles: {
+            fillColor: [252, 252, 254]
+        },
+        columnStyles: {
+            0: { halign: 'left', cellWidth: 35 },
+            1: { halign: 'right', cellWidth: 50 },
+            2: { halign: 'center', cellWidth: 25 },
+            3: { halign: 'right', cellWidth: 35 }
+        },
+        margin: { left: 35, right: 15 },
+        tableWidth: 'wrap'
+    });
+    
+    // Get table end position
+    const tableEndY = doc.lastAutoTable.finalY;
+    
+    // Check if we need a new page for summary
+    const summaryHeight = 60;
+    const footerHeight = 20;
+    let summaryY;
+    
+    if (tableEndY + summaryHeight + footerHeight > pageHeight - 10) {
+        // Add new page
+        doc.addPage();
+        summaryY = 30;
+        
+        // Add page header for page 2
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(16);
+        doc.setTextColor(...primaryColor);
+        doc.text("Tax Summary - Continued", 20, 20);
+        doc.setDrawColor(...primaryColor);
+        doc.line(20, 22, 120, 22);
+    } else {
+        summaryY = tableEndY + 15;
+    }
+    
+    // Tax Summary Section
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(...primaryColor);
+    doc.text("Final Tax Summary", 20, summaryY);
+    
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.8);
+    doc.line(20, summaryY + 2, 115, summaryY + 2);
+    
+    summaryY += 10;
+    
+    // Enhanced summary box
+    doc.setFillColor(240, 245, 255);
+    doc.roundedRect(35, summaryY, pageWidth - 50, 35, 3, 3, 'F');
+    
+    // Add subtle border
+    doc.setDrawColor(...primaryColor);
+    doc.setLineWidth(0.3);
+    doc.roundedRect(35, summaryY, pageWidth - 50, 35, 3, 3, 'S');
+    
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(11);
+    doc.setTextColor(...darkGray);
+    
+    const summaryLeftCol = 40;
+    const summaryRightCol = 130;
+    
+    doc.text("Total Payable Tax:", summaryLeftCol, summaryY + 10);
+    doc.setFont("helvetica", "normal");
+    doc.text(formatCurrency(total_tax), summaryRightCol, summaryY + 10);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Maximum Rebate:", summaryLeftCol, summaryY + 18);
+    doc.setFont("helvetica", "normal");
+    doc.text(formatCurrency(max_rebate), summaryRightCol, summaryY + 18);
+    
+    // Highlight net tax - larger and colored
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(13);
+    doc.setTextColor(...secondaryColor);
+    doc.text("Net Tax Payable:", summaryLeftCol, summaryY + 28);
+    doc.setFontSize(14);
+    doc.text(formatCurrency(remaining_tax), summaryRightCol, summaryY + 28);
+    
+    // Add footer on current page
+    const currentPageHeight = doc.internal.pageSize.getHeight();
+    const footerY = currentPageHeight - 15;
+    
+    // Footer line
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.3);
+    doc.line(35, footerY - 5, pageWidth - 15, footerY - 5);
+    
+    // Footer text
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.setTextColor(120, 120, 120);
+    
+    const currentDate = new Date().toLocaleDateString('en-BD', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    const footerText = `Generated on ${currentDate} | Tax Calculator | Developed by Mustafiz Arman`;
+    const footerWidth = doc.getTextWidth(footerText);
+    doc.text(footerText, (pageWidth - footerWidth) / 2, footerY);
+    
+    // Add page numbers if multiple pages
+    const pageCount = doc.getNumberOfPages();
+    if (pageCount > 1) {
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(8);
+            doc.setTextColor(120, 120, 120);
+            doc.text(`Page ${i} of ${pageCount}`, pageWidth - 30, footerY);
+        }
+    }
+    
   setTimeout(() => {
     document.getElementById('slab_div').style.display = 'inline-block';
   }, 1000);
@@ -295,16 +457,16 @@ document.getElementById('taxForm').addEventListener('submit', function (e) {
 
 document.getElementById('downloadBtn').addEventListener('click', function () {
     // Draw top margin
-    doc.line(20, 10, 190, 10); 
+    // doc.line(20, 10, 190, 10); 
 
-    // Draw bottom margin
-    doc.line(20, 280, 190, 280);
+    // // Draw bottom margin
+    // doc.line(20, 280, 190, 280);
 
-    // Draw left margin
-    doc.line(20, 10, 20, 280);
+    // // Draw left margin
+    // doc.line(20, 10, 20, 280);
 
-    // Draw right margin
-    doc.line(190, 10, 190, 280);
+    // // Draw right margin
+    // doc.line(190, 10, 190, 280);
 
 
   let name = localStorage.getItem('name').toLowerCase();

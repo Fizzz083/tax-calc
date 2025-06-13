@@ -1,0 +1,377 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Background and layout */
+.page-wrapper {
+    min-height: 100vh;
+    position: relative;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: -1;
+}
+
+.background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+#pageContent {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Typography */
+.header-header {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #4a5568;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    position: relative;
+    padding-left: 15px;
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 2px;
+}
+
+h3 {
+    color: #2d3748;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Form styles */
+#taxForm {
+    margin-bottom: 30px;
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #4a5568;
+    font-size: 0.95rem;
+}
+
+.input-group input,
+.dropdown {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.input-group input:focus,
+.dropdown:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.input-group input:hover,
+.dropdown:hover {
+    border-color: #cbd5e0;
+    transform: translateY(-1px);
+}
+
+/* Custom button styles */
+.custom-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 10px 5px;
+}
+
+.custom-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+.custom-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Table styles */
+.table-wrapper {
+    margin: 30px 0;
+    overflow-x: auto;
+    border-radius: 25px;
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1);
+    background: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+table thead {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+table th,
+table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+table tbody tr {
+    transition: all 0.3s ease;
+}
+
+table tbody tr:hover {
+    background: #f7fafc;
+    transform: scale(1.01);
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Results display */
+#total_salary,
+#total_investment,
+#taxable_income,
+#total_tax,
+#total_rebate,
+#remaining_tax {
+    background: linear-gradient(135deg, #f7fafc, #edf2f7);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 15px 0;
+    border-left: 4px solid #667eea;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #2d3748;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#slab_div h1 {
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Divider styles */
+hr {
+    border: none !important;
+    height: 3px !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    border-radius: 2px;
+    margin: 30px 0 !important;
+}
+
+/* Small text styles */
+p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+p[style*="font-size: 10px"] {
+    color: #718096;
+    font-style: italic;
+    margin-top: 2px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    #pageContent {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+    
+    .header-header {
+        font-size: 2rem;
+    }
+    
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .input-group {
+        min-width: auto;
+    }
+    
+    table {
+        font-size: 0.9rem;
+    }
+    
+    table th,
+    table td {
+        padding: 10px 12px;
+    }
+    
+    .custom-button {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-header {
+        font-size: 1.8rem;
+    }
+    
+    #pageContent {
+        padding: 20px 15px;
+    }
+    
+    table {
+        font-size: 0.8rem;
+    }
+    
+    table th,
+    table td {
+        padding: 8px 10px;
+    }
+}
+
+/* Animation for results */
+#slab_div {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Focus accessibility */
+*:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .background {
+        display: none;
+    }
+    
+    #pageContent {
+        background: #fff;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .custom-button {
+        display: none;
+    }
+}
